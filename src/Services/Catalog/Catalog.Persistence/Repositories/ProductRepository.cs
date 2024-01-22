@@ -17,9 +17,9 @@ namespace Catalog.Persistence.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly IMongoCollection<Product> _productsCollection; 
+        private readonly IMongoCollection<Product> _productsCollection;
         private readonly ILogger<ProductRepository> _logger;
-        public ProductRepository(IOptions<MongoDbConfig> config, ILogger<ProductRepository> logger) 
+        public ProductRepository(IOptions<MongoDbConfig> config, ILogger<ProductRepository> logger)
         {
             var mongoClient = new MongoClient(config.Value.ConnectionString);
             var mongoDatabase = mongoClient.GetDatabase(config.Value.Database);
@@ -37,7 +37,7 @@ namespace Catalog.Persistence.Repositories
                 var response = await _productsCollection.AsQueryable().Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
                 return response;
 
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 return null;
@@ -50,7 +50,7 @@ namespace Catalog.Persistence.Repositories
             {
                 var result = await _productsCollection.AsQueryable().ToListAsync();
                 return result;
-            }catch(Exception ext)
+            } catch (Exception ext)
             {
                 _logger.LogError(ext.Message);
                 return await Task.FromResult(Enumerable.Empty<Product?>());
@@ -69,6 +69,21 @@ namespace Catalog.Persistence.Repositories
             {
                 _logger.LogError(ext.Message);
                 return null;
+            }
+        }
+
+        public Task<IMongoQueryable<Product>> GetQueryableAsync(Expression<Func<Product, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var query = _productsCollection.AsQueryable();
+                var result = query.Where(predicate);
+                return Task.FromResult(result);
+            }catch(Exception ex)
+            {
+#nullable disable
+                _logger.LogError(ex.Message);
+                return Task.FromResult(default(IMongoQueryable<Product>));
             }
         }
 

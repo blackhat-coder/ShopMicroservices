@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -20,5 +21,7 @@ namespace Catalog.Domain.Products
         Task<Product?> GetAsync(Expression<Func<Product, bool>> predicate, CancellationToken cancellationToken = default);
 
         Task<IEnumerable<Product?>> GetAllAsync(CancellationToken cancellationToken = default);
+
+        Task<IMongoQueryable<Product>> GetQueryableAsync(Expression<Func<Product, bool>> predicate, CancellationToken cancellationToken = default);
     }
 }

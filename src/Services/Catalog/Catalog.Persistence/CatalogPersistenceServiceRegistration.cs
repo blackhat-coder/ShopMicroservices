@@ -13,7 +13,7 @@ namespace Catalog.Persistence
     {
         public static IServiceCollection AddCatalogPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<MongoDbConfig>("");
+            
             return services;
         }
     }

@@ -1,4 +1,5 @@
-﻿using Catalog.Application.Services.Products.DTOs;
+﻿using Catalog.Application.DTOs.Products;
+using Catalog.Application.Response;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Application.Services.Products.GetById
 {
-    public class GetProductByIdQuery : IRequest<GetProductsQueryResponse>
+    public class GetProductByIdQuery : IRequest<Result<GetProductsQueryResponse>>
     {
         public string ProductId { get; set; }
     }
