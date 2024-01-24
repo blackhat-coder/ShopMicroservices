@@ -25,7 +25,7 @@ namespace Catalog.API.Controllers
             return ApiResponse(product);
         }
 
-        
+        [HttpPost("create-product")]
         public async Task<ActionResult> CreateProduct(CreateProductCommand request)
         {
             var product = await _mediator.Send(request);
