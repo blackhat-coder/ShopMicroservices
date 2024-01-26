@@ -8,6 +8,7 @@ namespace Catalog.API.Controllers
     [ApiController]
     public class BaseController : ControllerBase
     {
+        [ApiExplorerSettings(IgnoreApi = true)]
         public ActionResult ApiResponse(Result response)
         {
             if (response.IsSuccess)
@@ -47,7 +48,7 @@ namespace Catalog.API.Controllers
             });
         }
 
-
+        [ApiExplorerSettings(IgnoreApi = true)]
         public ActionResult ApiResponse<T>(Result<T> response)
         {
             if (response.IsSuccess)
