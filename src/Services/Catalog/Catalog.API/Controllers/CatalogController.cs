@@ -1,4 +1,5 @@
 ﻿using Catalog.Application.Services.Products.CreateProduct;
+using Catalog.Application.Services.Products.DeleteProduct;
 using Catalog.Application.Services.Products.GetById;
 using Catalog.Application.Services.Products.GetProducts;
 using MediatR;
@@ -30,6 +31,13 @@ namespace Catalog.API.Controllers
         {
             var product = await _mediator.Send(request);
             return ApiResponse(product);
+        }
+
+        [HttpPost("delete-product/{id}")]
+        public async Task<ActionResult> DeleteProduct([FromQuery] string id)
+        {
+            var response = await _mediator.Send(new DeleteProductCommand { ProductId = id });
+            return ApiResponse(response);
         }
     }
 }

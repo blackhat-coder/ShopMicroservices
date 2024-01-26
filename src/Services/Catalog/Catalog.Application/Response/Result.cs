@@ -27,7 +27,7 @@ public class Result
         return await Task.FromResult(new Result { message = message, status = "Failed", StatusCode = (int)statusCode });
     }
 
-    public async Task<Result> ExceptionAsync(string message) 
+    public static async Task<Result> ExceptionAsync(string message) 
     {
         return await Task.FromResult(new Result { message = message, status = "Failed", IsException = true, StatusCode = 500 });
     }

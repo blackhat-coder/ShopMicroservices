@@ -21,5 +21,6 @@ namespace Catalog.Domain.Products
         public const string ProductCategoryInvalid = "Product Category cannot be empty";
         public const string ProductStockInvalid = "Product Stock cannot be 0";
         public const string ProductPriceInvalid = "Product price cannot empty";
+        public const string ProductDeleted = "Product Deleted";
     }
 }
